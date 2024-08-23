@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenya Universities Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        const universities = [
+            {
+                name: "University of Nairobi",
+                coords: [-1.28333, 36.81667],
+                size: "Approx. 84,000 students"
+            },
+            {
+                name: "Kenyatta University",
+                coords: [-1.18192, 36.92833],
+                size: "Approx. 70,000 students"
+            },
+            {
+                name: "Strathmore University",
+                coords: [-1.30025, 36.81163],
+                size: "Approx. 8,000 students"
+            },
+            {
+                name: "Jomo Kenyatta University of Agriculture and Technology",
+                coords: [-1.095, 37.015],
+                size: "Approx. 50,000 students"
+            },
+            {
+                name: "Moi University",
+                coords: [0.28333, 35.28333],
+                size: "Approx. 52,000 students"
+            }
+        ];
+
+        const map = L.map('map').setView([-1.28333, 36.81667], 7);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        universities.forEach(university => {
+            const marker = L.marker(university.coords).addTo(map);
+            marker.bindPopup(`<b>${university.name}</b><br>${university.size}`);
+        });
+    </script>
+</body>
+</html>
